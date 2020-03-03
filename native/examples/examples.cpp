@@ -25,6 +25,10 @@ int main()
         cout << "| 4. CKKS Basics             | 4_ckks_basics.cpp          |" << endl;
         cout << "| 5. Rotation                | 5_rotation.cpp             |" << endl;
         cout << "| 6. Performance Test        | 6_performance.cpp          |" << endl;
+        cout << "| 7. Fibonacci               | 7_fibonacci.cpp            |" << endl;
+        cout << "| 8. Power of two            | 8_additions.cpp            |" << endl;
+        cout << "| 9. Divisions               | 9_divisions.cpp            |" << endl;
+        cout << "| 10. Negative Numbers       | 10_negative_numbers.cpp    |" << endl;
         cout << "+----------------------------+----------------------------+" << endl;
 
         /*
@@ -41,12 +45,12 @@ int main()
         bool invalid = true;
         do
         {
-            cout << endl << "> Run example (1 ~ 6) or exit (0): ";
+            cout << endl << "> Run example (1 ~ 10) or exit (0): ";
             if (!(cin >> selection))
             {
                 invalid = false;
             }
-            else if (selection < 0 || selection > 6)
+            else if (selection < 0 || selection > 10)
             {
                 invalid = false;
             }
@@ -56,7 +60,7 @@ int main()
             }
             if (!invalid)
             {
-                cout << "  [Beep~~] Invalid option: type 0 ~ 6" << endl;
+                cout << "  [Beep~~] Invalid option: type 0 ~ 10" << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -86,6 +90,22 @@ int main()
 
         case 6:
             example_performance_test();
+            break;
+
+        case 7:
+            example_fibonacci();
+            break;
+
+        case 8:
+            power_of_two();
+            break;
+
+        case 9:
+            divisions();
+            break;
+
+        case 10:
+            negative_numbers();
             break;
 
         case 0:

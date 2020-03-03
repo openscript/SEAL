@@ -17,6 +17,10 @@ target_sources(sealexamples
         4_ckks_basics.cpp
         5_rotation.cpp
         6_performance.cpp
+        7_fibonacci.cpp
+        8_additions.cpp
+        9_divisions.cpp
+        10_negative_numbers.cpp
 )
 
 # Import Microsoft SEAL

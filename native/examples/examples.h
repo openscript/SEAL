@@ -31,6 +31,14 @@ void example_rotation();
 
 void example_performance_test();
 
+void example_fibonacci();
+
+void power_of_two();
+
+void divisions();
+
+void negative_numbers();
+
 /*
 Helper function: Prints the name of the example in a fancy banner.
 */
