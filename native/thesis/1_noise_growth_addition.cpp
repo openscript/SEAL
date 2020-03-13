@@ -46,8 +46,11 @@ int main(int argc, char** argv) {
     int add = atoi(argv[5]);
 
     Plaintext initial_plain(to_string(initial));
+    Plaintext add_plain(to_string(add));
+    Ciphertext add_encrypted;
     Ciphertext current_encrypted;
     encryptor.encrypt(initial_plain, current_encrypted);
+    encryptor.encrypt(add_plain, add_encrypted);
     cout << "Initialized with 0x" + initial_plain.to_string() << endl;
     cout << "Initial noise budget:" << decryptor.invariant_noise_budget(current_encrypted) << " bits" << endl;
 
