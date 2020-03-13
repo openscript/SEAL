@@ -8,11 +8,7 @@ project(SEALThesis VERSION 3.4.5 LANGUAGES CXX)
 # Executable will be in ../bin
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SEALThesis_SOURCE_DIR}/../bin)
 
-add_executable(sealthesis thesis.cpp)
-target_sources(sealthesis
-    PRIVATE
-        1_noise_growth_addition.cpp
-)
+add_executable(1_noise_growth_addition 1_noise_growth_addition.cpp)
 
 # Import Microsoft SEAL
 find_package(SEAL 3.4.5 EXACT REQUIRED
@@ -21,4 +17,4 @@ find_package(SEAL 3.4.5 EXACT REQUIRED
 )
 
 # Link Microsoft SEAL
-target_link_libraries(sealthesis SEAL::seal)
+target_link_libraries(1_noise_growth_addition SEAL::seal)

@@ -19,7 +19,6 @@
 #include <numeric>
 #include "seal/seal.h"
 
-void noise_growth_addition();
 
 /*
 Helper function: Prints the name of the example in a fancy banner.
