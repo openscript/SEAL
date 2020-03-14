@@ -62,14 +62,14 @@ int main(int argc, char** argv) {
     for( int i = 0; i < count; i = i + 1 ) {
         outfile << i + 1 << ",";
         evaluator.add_inplace(current_encrypted, add_encrypted);
-        outfile << decryptor.invariant_noise_budget(current_encrypted) << ",";
-        decryptor.decrypt(current_encrypted, decrypted_value);
-        outfile << "0x" + decrypted_value.to_string() << endl;
+        outfile << decryptor.invariant_noise_budget(current_encrypted);
     }
     auto t2 = chrono::high_resolution_clock::now();
 
     auto duration = chrono::duration_cast<chrono::microseconds>( t2 - t1 ).count();
     cout << "Duration: " << duration << " microseconds" << endl;
+    decryptor.decrypt(current_encrypted, decrypted_value);
+    cout << "Result: " << "0x" + decrypted_value.to_string() << endl;
 
     cout << "Allocated memory: " << MemoryManager::GetPool().alloc_byte_count() << endl;
 }
