@@ -10,6 +10,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${SEALThesis_SOURCE_DIR}/../bin)
 
 add_executable(1_noise_growth_addition 1_noise_growth_addition.cpp)
 add_executable(2_noise_growth_subtraction 2_noise_growth_subtraction.cpp)
+add_executable(3_noise_growth_multiplication 3_noise_growth_multiplication.cpp)
 
 # Import Microsoft SEAL
 find_package(SEAL 3.4.5 EXACT REQUIRED
@@ -20,3 +21,4 @@ find_package(SEAL 3.4.5 EXACT REQUIRED
 # Link Microsoft SEAL
 target_link_libraries(1_noise_growth_addition SEAL::seal)
 target_link_libraries(2_noise_growth_subtraction SEAL::seal)
+target_link_libraries(3_noise_growth_multiplication SEAL::seal)
