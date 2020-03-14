@@ -8,12 +8,12 @@ using namespace seal;
 
 int main(int argc, char** argv) {
     if (argc != 6) {
-        cout << argv[0] << " [poly_modulus_degree] [plain_modulus] [iterations] [initial] [add]" << endl;
+        cout << argv[0] << " [poly_modulus_degree] [plain_modulus] [iterations] [initial] [sub]" << endl;
         return 0;
     }
 
     print_example_banner(
-        "IMPL-01: Verkettung von einfachen Additionen"
+        "IMPL-02: Verkettung von einfachen Subtraktionen"
     );
     cout << "Allocated memory: " << MemoryManager::GetPool().alloc_byte_count() << endl;
 
@@ -46,27 +46,29 @@ int main(int argc, char** argv) {
     stringstream initial_stream;
     initial_stream << hex << atoi(argv[4]);
 
-    stringstream add_stream;
-    add_stream << hex << atoi(argv[5]);
+    stringstream sub_stream;
+    sub_stream << hex << atoi(argv[5]);
 
     Plaintext initial_plain(initial_stream.str());
-    Plaintext add_plain(add_stream.str());
-    Ciphertext add_encrypted;
+    Plaintext sub_plain(sub_stream.str());
+    Ciphertext sub_encrypted;
     Ciphertext current_encrypted;
     encryptor.encrypt(initial_plain, current_encrypted);
-    encryptor.encrypt(add_plain, add_encrypted);
+    encryptor.encrypt(sub_plain, sub_encrypted);
     cout << "Initialized with 0x" + initial_plain.to_string() << endl;
     cout << "Initial noise budget:" << decryptor.invariant_noise_budget(current_encrypted) << " bits" << endl;
 
     Plaintext decrypted_value;
     ofstream outfile;
-    outfile.open("impl-01.csv");
+    stringstream filename;
+    filename << "impl-02-" << argv[3] << ".csv";
+    outfile.open(filename.str());
     auto t1 = chrono::high_resolution_clock::now();
     
     for( int i = 0; i < iterations; i = i + 1 ) {
         outfile << i + 1 << ",";
-        evaluator.add_inplace(current_encrypted, add_encrypted);
-        outfile << decryptor.invariant_noise_budget(current_encrypted);
+        evaluator.sub_inplace(current_encrypted, sub_encrypted);
+        outfile << decryptor.invariant_noise_budget(current_encrypted) << endl;
     }
     auto t2 = chrono::high_resolution_clock::now();
 
