@@ -50,34 +50,30 @@ int main(int argc, char** argv) {
 
     Plaintext plain;
     double scale = pow(2.0, 5);
-    print_line(__LINE__);
-    cout << "Encode input vector." << endl;
     encoder.encode(input, scale, plain);
 
     vector<double> output;
-    cout << "    + Decode input vector ...... Correct." << endl;
     encoder.decode(plain, output);
     print_vector(output);
 
 
     Ciphertext current_encrypted;
-    print_line(__LINE__);
-    cout << "Encrypt input vector, square, and relinearize." << endl;
     encryptor.encrypt(plain, current_encrypted);
-
 
     Plaintext plain_division;
     encoder.encode(atof(argv[5]), scale, plain_division);
 
+    auto t1 = chrono::high_resolution_clock::now();
     for( int i = 0; i < atoi(argv[3]); i = i + 1 ) {
         evaluator.multiply_plain_inplace(current_encrypted, plain_division);
         evaluator.relinearize_inplace(current_encrypted, relin_keys);
     }
+    auto t2 = chrono::high_resolution_clock::now();
 
-    cout << "Decrypt and decode." << endl;
+    auto duration = chrono::duration_cast<chrono::microseconds>( t2 - t1 ).count();
+    cout << "Duration: " << duration << " microseconds" << endl;
+
     decryptor.decrypt(current_encrypted, plain);
     encoder.decode(plain, output);
-    cout << "    + Result vector ...... Correct." << endl;
-    print_vector(output);
-    cout << output[0] << endl;
+    cout << "Result: " << output[0] << endl;
 }

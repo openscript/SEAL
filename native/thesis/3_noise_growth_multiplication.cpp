@@ -63,8 +63,8 @@ int main(int argc, char** argv) {
     stringstream filename;
     filename << "impl-03-" << argv[3] << ".csv";
     outfile.open(filename.str());
-    auto t1 = chrono::high_resolution_clock::now();
     
+    auto t1 = chrono::high_resolution_clock::now();
     for( int i = 0; i < iterations; i = i + 1 ) {
         outfile << i + 1 << ",";
         evaluator.multiply_inplace(current_encrypted, multi_encrypted);
